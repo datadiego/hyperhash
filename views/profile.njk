@@ -1,0 +1,24 @@
+{% extends "base.njk" %}
+
+{% block title %}Perfil{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <td>Username</td>
+        <td>{{ username }}</td>
+    </tr>
+    <tr>
+        <td>Cracked hashes</td>
+        <td>{{ correct_guesses }}</td>
+    </tr>
+    <tr>
+        <td>Failed guesses</td>
+        <td>{{ failed_guesses }}</td>
+    </tr>
+    <tr>
+        <td>Rank</td>
+        <td>{{ rank }}</td>
+    </tr>
+</table>
+{% endblock %}

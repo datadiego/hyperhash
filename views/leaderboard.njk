@@ -1,0 +1,21 @@
+{% extends "base.njk" %}
+
+{% block title %}Leaderboards{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <td>#</td>
+        <td>Nombre</td>
+        <td>Puntos</td>
+    </tr>
+
+    {% for user in users %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ user.username }}</td>
+        <td>{{ user.points }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

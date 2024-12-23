@@ -1,0 +1,19 @@
+{% extends "base.njk" %}
+
+{% block title %}Game{% endblock %}
+
+{% block content %}
+<p id="hash" class="centered">{{ hash }}</p>
+    <form action="/responder" class="flex-col flex-center gap">
+        <input type="text" id="input" placeholder="Respuesta" name="respuesta">
+        <input type="submit" value="Enviar">
+    </form>
+
+{% if error %}
+    <p class="centered">{{ error }}</p>
+{% endif %}
+
+{% if success %}
+    <p class="centered">Hash correcto!</p>
+{% endif %}
+{% endblock %}

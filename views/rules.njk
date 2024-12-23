@@ -1,0 +1,48 @@
+{% extends "base.njk" %}
+
+{% block title %}Reglas{% endblock %}
+
+{% block content %}
+
+<h2>Hashing</h2>
+<p>Un hash es una función que toma una cadena de texto y la convierte en una cadena de texto de longitud fija.</p>
+<p>Por ejemplo, si tienes la cadena "hola", puedes convertirla en el hash "31d6cfe0d16ae931b73c59d7e0c089c0" con el algoritmo "MD4".</p>
+<pre>
+╔════════╗    ╔═════╗
+║ "hola" ╠═══>║ MD4 ╠═>"31d6cfe0d16ae931b73c59d7e0c089c0"
+╚════════╝    ╚═════╝
+</pre>
+
+<p>Una vez que tienes el hash, no puedes convertirlo de vuelta a la cadena original, esto hace que los hashes sean útiles para almacenar contraseñas y otros datos sensibles.</p>
+<p>Aunque no puedas sacar información de un hash, si que puedes hashear multiples palabras y compararlas con el hash que tienes.</p>
+<pre>
+╔palabra_original═╗  
+║ "?????????????" ╠═> "31d6cfe0d16ae931b73c59d7e0c089c0"<═╗
+╚═════════════════╝                                       ║
+╔diccionario══╗                                      ╔════╝
+║ "password"  ╠═> "8a9d093f14f8701df17732b2bb182c74" ║ Coinciden!
+║ "1234"      ╠═> "f375f401ddc698af533f16f8ac1e91c1" ║ 
+║ "qwerty"    ╠═> "2a4bbeffd06c016ab4134cc7963496d2" ║
+║ "hola"      ╠═> "31d6cfe0d16ae931b73c59d7e0c089c0"<╝
+╚═════════════╝
+</pre>
+
+<p>Esto identifica la palabra "hola" como la contraseña correcta usando el algoritmo MD4.</p>
+<h2>Herramientas</h2>
+<p>Si nunca has roto un hash, te recomendamos empezar por estas herramientas:</p>
+<ul>
+    <li>hashcat</li>
+    <li>John the Ripper</li>
+</ul>
+
+<p>Puedes usarlas en Ubuntu o Kali Linux.</p>
+
+<h2>Reglas</h2>
+<ul>
+    <li>No se permite cualquier accion que pueda resultar en un DoS.</li>
+    <li>No se permiten intentos de penetración al servidor.</li>
+    <li>Puedes llamar a nuestra API.</li>
+    <li>Automatizar el proceso de romper hashes está permitido.</li>
+</ul>
+
+{% endblock %}
