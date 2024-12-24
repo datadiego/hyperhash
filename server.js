@@ -10,6 +10,10 @@ const getRandomHash = require('./utils/getRandom');
 
 let actual_hash = getRandomHash();
 
+const session = require('express-session');
+
+
+
 dotenv.config();
 const COOKIE_SECRET = process.env.COOKIE_SECRET;
 
@@ -20,6 +24,14 @@ const dbPath = path.join(__dirname, 'db/db.sqlite');
 if (!fs.existsSync(dbPath)) {
     require('./db/init');
 }
+
+// Configura express-session
+app.use(session({
+    secret: COOKIE_SECRET,
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false } // Cambia a true si usas HTTPS
+}));
 
 //config
 app.use(express.static('views'));
@@ -96,14 +108,12 @@ app.get('/register', (req, res) => {
 });
 
 app.get('/logout', (req, res) => {
-    res.clearCookie('token');
+    req.session.destroy();
     res.render('login');
 }); 
 
 app.get('/profile', isAuthenticated(), (req, res) => {
-    const token = req.headers.cookie.split('=')[1];
-    const decoded = jwt.verify(token, COOKIE_SECRET);
-    const user = User.getFromUsername(decoded.user);
+    const user = User.getFromUsername(req.session.user);
     res.render('profile', user);
 }); 
 

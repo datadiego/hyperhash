@@ -25,9 +25,10 @@
             body: JSON.stringify({ username, password })
         });
         const data = await response.json();
-        if (data.token) {
-            document.cookie = `token=${data.token}`;
+        if (data.success) {
             window.location = '/profile';
+        } else {
+            window.location = '/login';
         }
     });
 </script>

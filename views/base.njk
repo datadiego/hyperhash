@@ -31,13 +31,16 @@
     <header>
     <nav>
         <ul class="flex-row">
-            <li><a href="/" id="index-link">Inicio</a></li>
-            <li><a href="/rules" id="rules-link">Guia</a></li>
-            <li><a href="/profile" id="profile-link">Perfil</a></li>
-            <li><a href="/leaderboard" id="leaderboard-link">Leaderboard</a></li>
-            <li><a href="/logout" id="logout-link">Logout</a></li>
-            <li><a href="/login" id="login-link">Login</a></li>
-            <li><a href="/register" id="register-link">Registro</a></li>
+            {% if session.user %}
+                <li><a href="/" id="index-link">Inicio</a></li>
+                <li><a href="/rules" id="rules-link">Guia</a></li>
+                <li><a href="/profile" id="profile-link">Perfil</a></li>
+                <li><a href="/leaderboard" id="leaderboard-link">Leaderboard</a></li>
+                <li><a href="/logout" id="logout-link">Logout</a></li>
+            {% else %}
+                <li><a href="/login" id="login-link">Login</a></li>
+                <li><a href="/register" id="register-link">Registro</a></li>
+            {% endif %}
         </ul>
     </nav>
     <pre class="centered">
@@ -58,24 +61,5 @@
     <footer>
         <p>2024 datadiego</p>
     </footer>
-    <script>
-        if(!document.cookie.includes('token')) {
-            document.querySelector('#index-link').hidden = true;
-            document.querySelector('#rules-link').hidden = true;
-            document.querySelector('#profile-link').hidden = true;
-            document.querySelector('#logout-link').hidden = true;
-            document.querySelector('#login-link').hidden = false;
-            document.querySelector('#register-link').hidden = false;
-            document.querySelector('#leaderboard-link').hidden = true;
-        } else {
-            document.querySelector('#profile-link').hidden = false;
-            document.querySelector('#logout-link').hidden = false;
-            document.querySelector('#login-link').hidden = true;
-            document.querySelector('#register-link').hidden = true;
-            document.querySelector('#index-link').hidden = false;
-            document.querySelector('#rules-link').hidden = false;
-            document.querySelector('#leaderboard-link').hidden = false;
-        }
-    </script>
 </body>
 </html>
