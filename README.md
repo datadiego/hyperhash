@@ -1,10 +1,11 @@
+```
     __                          __               __  
    / /_  __  ______  ___  _____/ /_  ____ ______/ /_ 
   / __ \/ / / / __ \/ _ \/ ___/ __ \/ __ `/ ___/ __ \
  / / / / /_/ / /_/ /  __/ /  / / / / /_/ (__  ) / / /
 /_/ /_/\__, / .___/\___/_/  /_/ /_/\__,_/____/_/ /_/ 
       /____/_/                                       
-
+```
 Hyperhash es un juego multijugador de cracking de contraseñas. Los jugadores compiten por romper el hash de una contraseña, quien lo haga primero consigue puntos.
 
 ## Tecnologías
