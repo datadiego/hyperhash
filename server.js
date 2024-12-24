@@ -33,6 +33,10 @@ app.use(session({
     cookie: { secure: false } // Cambia a true si usas HTTPS
 }));
 
+app.use((req, res, next) => {
+    res.locals.session = req.session;
+    next();
+});
 //config
 app.use(express.static('views'));
 app.use(express.json());
