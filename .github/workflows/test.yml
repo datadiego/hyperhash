@@ -28,20 +28,18 @@ jobs:
         context: .
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/hyperhash:latest
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-
-    steps:
-    - name: SSH to Linode and deploy
-      uses: appleboy/ssh-action@v0.1.3
-      with:
-        host: ${{ secrets.LINODE_HOST }}
-        username: ${{ secrets.LINODE_USERNAME }}
-        key: ${{ secrets.LINODE_SSH_KEY }}
-        script: |
-          docker pull ${{ secrets.DOCKER_USERNAME }}/hyperhash:latest
-          docker stop hyperhash || true
-          docker rm hyperhash || true
-          docker run -d --name hyperhash -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/hyperhash:latest
+#  deploy:
+#    runs-on: ubuntu-latest
+#    needs: build
+#    steps:
+#    - name: SSH to Linode and deploy
+#      uses: appleboy/ssh-action@v0.1.3
+#      with:
+#        host: ${{ secrets.LINODE_HOST }}
+#        username: ${{ secrets.LINODE_USERNAME }}
+#        key: ${{ secrets.LINODE_SSH_KEY }}
+#        script: |
+#          docker pull ${{ secrets.DOCKER_USERNAME }}/hyperhash:latest
+#          docker stop hyperhash || true
+#          docker rm hyperhash || true
+#          docker run -d --name hyperhash -p 3000:3000 ${{ secrets.DOCKER_USERNAME }}/hyperhash:latest
