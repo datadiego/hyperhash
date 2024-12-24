@@ -6,7 +6,9 @@
 /_/ /_/\__, / .___/\___/_/  /_/ /_/\__,_/____/_/ /_/ 
       /____/_/                                       
 ```
-Hyperhash es un juego multijugador de cracking de contraseñas. Los jugadores compiten por romper el hash de una contraseña, quien lo haga primero consigue puntos.
+Hyperhash es un juego multijugador de navegador. 
+
+Los jugadores compiten por romper el hash de una contraseña, quien lo haga primero gana puntos en el ranking.
 
 ## Tecnologías
 
