@@ -35,7 +35,7 @@ npm run start
 
 Deberias tener accesible tu servidor en `http://localhost:3000`.
 
-## TODO
+## DONE
 
 - [X] Autenticación
 - [X] Ranking
@@ -46,16 +46,16 @@ Deberias tener accesible tu servidor en `http://localhost:3000`.
 - [X] Hashing SHA256
 - [X] Hashing SHA512
 - [X] CI
+- [x] Hashing bcrypt
+- [x] Bcrypt para passwords de usuarios
 
 ## TODO
 
 - [ ] CD
 - [ ] Tests
 - [ ] Sesiones de usuarios con Redis
-- [ ] Avatar aleatorio ASCII
 - [ ] Modo de juego por equipos
 - [ ] Modo de un solo jugador
-- [ ] Hashing bcrypt
 - [ ] Hashing scrypt
 - [ ] Hashing argon2
 - [ ] Hashing pbkdf2
