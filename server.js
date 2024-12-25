@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 const User = require('./models/users');
 const getRandomHash = require('./utils/getRandom');
 
+
 let actual_hash = getRandomHash();
 
 const session = require('express-session');
@@ -28,7 +29,8 @@ app.use(session({
     resave: false,
     saveUninitialized: true,
     cookie: { 
-        secure: false // Cambia a true si usas HTTPS
+        secure: false, // Cambia a true si usas HTTPS
+        httpOnly: true
     } 
 }));
 

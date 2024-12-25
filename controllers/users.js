@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/users');
+const limiter = require('../middleware/limiter');
 
 router.get('/', (req, res) => {
     try {
@@ -22,9 +23,17 @@ router.get('/:id', (req, res) => {
     }
 });
 
-router.post('/register', (req, res) => {
-    console.log(req.body);
-    res.json(User.create(req.body));
+router.post('/register', limiter, (req, res) => {
+    try {
+        User.create(req.body);
+        const respuesta = {
+            username: req.body.username,
+            success: true
+        };
+        res.json(respuesta);
+    } catch (error) {
+        res.status(500).json({ error: 'Hubo un error durante el registro' });
+    }
 });
 
 router.put('/:id', (req, res) => {

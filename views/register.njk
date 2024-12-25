@@ -1,15 +1,15 @@
-
 {% extends "base.njk" %}
 
 {% block title %}Login{% endblock %}
 
 {% block content %}
 <h2>Register</h2>
-<form>
+<form class="grid">
     <input type="text" placeholder="user" name="username" required>
     <input type="password" placeholder="password" name="password" required>
     <input type="submit" value="Enviar">
 </form>
+<p id="respuesta"></p>
 
 <script>
 
@@ -26,7 +26,11 @@
             body: JSON.stringify({ username, password })
         });
         const data = await response.json();
-        window.location = '/login';
+        if (data.success) {
+            document.getElementById('respuesta').innerText = 'Usuario registrado exitosamente';
+        } else {
+            document.getElementById('respuesta').innerText = 'Error al registrar usuario';
+        }
     });
 </script>
 {% endblock %}
