@@ -112,7 +112,7 @@ app.get('/register', (req, res) => {
 
 app.get('/logout', (req, res) => {
     req.session.destroy();
-    res.render('login');
+    res.redirect('/');
 }); 
 
 app.get('/profile', isAuthenticated(), (req, res) => {

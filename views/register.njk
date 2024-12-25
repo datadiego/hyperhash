@@ -9,6 +9,8 @@
     <input type="password" placeholder="password" name="password" required>
     <input type="submit" value="Enviar">
 </form>
+<p>No necesitas email para jugar.</p>
+<p>Guarda tus credenciales en un lugar seguro.</p>
 <p id="respuesta"></p>
 
 <script>
@@ -28,6 +30,8 @@
         const data = await response.json();
         if (data.success) {
             document.getElementById('respuesta').innerText = 'Usuario registrado exitosamente';
+            //limpia los inputs
+            document.querySelector('form').reset();
         } else {
             document.getElementById('respuesta').innerText = 'Error al registrar usuario';
         }

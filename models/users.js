@@ -1,6 +1,6 @@
 const sqlite = require('better-sqlite3');
 const path = require('path');
-
+const bcrypt = require('bcrypt');
 const dbPath = path.join(__dirname, '../db/db.sqlite');
 
 const User = {
@@ -26,9 +26,12 @@ const User = {
         return result;
     },
     create: user => {
+        console.log(user)
         const db = new sqlite(dbPath);
+        const saltRounds = 10;
+        const hash = bcrypt.hashSync(user.password, saltRounds);
         const query = 'INSERT INTO users (username, password) VALUES (?, ?)';
-        const result = db.prepare(query).run(user.username, user.password);
+        const result = db.prepare(query).run(user.username, hash);
         db.close();
         return result;
     },

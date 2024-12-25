@@ -3,6 +3,7 @@ const User = require('../models/users');
 const { isValidUser } = require('../models/auth');
 const dotenv = require('dotenv');
 dotenv.config();
+const bcrypt = require('bcrypt');
 const COOKIE_SECRET = process.env.COOKIE_SECRET;
 
 router.post('/login', (req, res) => {

@@ -7,6 +7,6 @@ CREATE TABLE IF NOT EXISTS users  (
     points INTEGER DEFAULT 0
 );
 
-INSERT INTO users (username, password, failed_guesses, correct_guesses) VALUES ('admin', 'admin', 0, 0);
-INSERT INTO users (username, password, failed_guesses, correct_guesses) VALUES ('user', 'user', 0, 0);
+--INSERT INTO users (username, password, failed_guesses, correct_guesses) VALUES ('admin', 'admin', 0, 0);
+--INSERT INTO users (username, password, failed_guesses, correct_guesses) VALUES ('user', 'user', 0, 0);
 
