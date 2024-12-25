@@ -3,7 +3,6 @@ const fs = require('fs');
 const isAuthenticated = require('./middleware/auth');
 const express = require('express');
 const nunjucks = require('nunjucks');
-const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const User = require('./models/users');
 const getRandomHash = require('./utils/getRandom');
@@ -11,8 +10,6 @@ const getRandomHash = require('./utils/getRandom');
 let actual_hash = getRandomHash();
 
 const session = require('express-session');
-
-
 
 dotenv.config();
 const COOKIE_SECRET = process.env.COOKIE_SECRET;
@@ -30,7 +27,9 @@ app.use(session({
     secret: COOKIE_SECRET,
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false } // Cambia a true si usas HTTPS
+    cookie: { 
+        secure: false // Cambia a true si usas HTTPS
+    } 
 }));
 
 app.use((req, res, next) => {
@@ -79,10 +78,8 @@ app.get("/responder", isAuthenticated(), (req, res) => {
     const obj = {
         hash: actual_hash["hash"]
     };
-    const token = req.headers.cookie.split('=')[1];
-    const decoded = jwt.verify(token, COOKIE_SECRET);
-    const user = User.getFromUsername(decoded.user);
-
+    const username = req.session.user;
+    const user = User.getFromUsername(username);
     if (respuesta === actual_hash["palabra"]) {
         actual_hash = getRandomHash();
         obj["success"] = true;
@@ -118,6 +115,8 @@ app.get('/logout', (req, res) => {
 
 app.get('/profile', isAuthenticated(), (req, res) => {
     const user = User.getFromUsername(req.session.user);
+    const leaderboard = User.leaderboard();
+    user.rank = leaderboard.findIndex(u => u.username === user.username);
     res.render('profile', user);
 }); 
 

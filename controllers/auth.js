@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const User = require('../models/users');
-const jwt = require('jsonwebtoken');
 const { isValidUser } = require('../models/auth');
 const dotenv = require('dotenv');
 dotenv.config();

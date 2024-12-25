@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 //const rockyou = fs.readFileSync(path.join(__dirname, 'rockyou.txt'), 'utf8').split('\n');
 const dict = fs.readFileSync(path.join(__dirname, 'dict.txt'), 'utf8').split('\n');
-const { encryptMD4, encryptMD5, encryptSHA1, encryptSHA256 } = require('./hashing');
+const { encryptMD4, encryptMD5, encryptSHA1, encryptSHA256, bcryptHash } = require('./hashing');
 
 
 const diccionarios = {
@@ -16,13 +16,15 @@ function getRandom(){
     const hashMD5 = encryptMD5(palabra);
     const hashSHA1 = encryptSHA1(palabra);
     const hashSHA256 = encryptSHA256(palabra);
+    const hashBcrypt = bcryptHash(palabra);
 
     return {
         palabra,
         hashMD4,
         hashMD5,
         hashSHA1,
-        hashSHA256
+        hashSHA256,
+        hashBcrypt
     }
 }
 

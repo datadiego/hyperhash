@@ -45,6 +45,24 @@ const User = {
         const result = db.prepare(query).run(id);
         db.close();
         return result;
+    },
+    leaderboard: () => {
+        const db = new sqlite(dbPath);
+        const query = 'SELECT username, points FROM users ORDER BY points DESC';
+        const users = db.prepare(query).all();
+        db.close();
+
+        //ordena los usuarios por puntos
+        const sortedUsers = users.sort((a, b) => b.points - a.points);
+        //filtra campos innecesarios
+        const filteredUsers = sortedUsers.map(user => {
+            return {
+                username: user.username,
+                points: user.points,
+                rank: sortedUsers.indexOf(user)
+            };
+        });
+        return filteredUsers;
     }
 };
 

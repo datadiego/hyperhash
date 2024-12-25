@@ -1,4 +1,6 @@
+
 const crypto = require('crypto');
+const bcrypt = require('bcrypt');
 
 function encryptMD4(input) {
     return crypto.createHash('sha1').update(input).digest('hex');
@@ -32,6 +34,15 @@ function encryptSHA256(input) {
 function compareSHA256(input, hash) {
     return encryptSHA256(input) === hash;
 }
+
+function bcryptHash(input) {
+    const saltRounds = 10;
+    return bcrypt.hashSync(input, saltRounds);
+}
+
+function compareBcrypt(input, hash) {
+    return bcrypt.compareSync(input, hash);
+}
 /*
 const password = 'password';
 const md4Hash = encryptMD4(password);
@@ -53,4 +64,4 @@ console.log('SHA256 compare:', compareSHA256(password, sha256Hash));
 
 
 
-module.exports = { encryptMD4, compareMd4, encryptMD5, compareMd5, encryptSHA1, compareSHA1, encryptSHA256, compareSHA256 };
+module.exports = { encryptMD4, compareMd4, encryptMD5, compareMd5, encryptSHA1, compareSHA1, encryptSHA256, compareSHA256, bcryptHash, compareBcrypt };
