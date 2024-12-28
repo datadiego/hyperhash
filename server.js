@@ -3,17 +3,22 @@ const fs = require('fs');
 const isAuthenticated = require('./middleware/auth');
 const express = require('express');
 const nunjucks = require('nunjucks');
-const dotenv = require('dotenv');
 const User = require('./models/users');
 const getRandomHash = require('./utils/getRandom');
+console.log(process.env.NODE_ENV);
 
-
+if(process.env.NODE_ENV !== 'production') {
+    console.log("Running in development mode");
+    require('dotenv').config();
+} else {
+    console.log("Running in production mode");
+}
+const COOKIE_SECRET = process.env.COOKIE_SECRET;
+console.log(COOKIE_SECRET);
 let actual_hash = getRandomHash();
 
 const session = require('express-session');
 
-dotenv.config();
-const COOKIE_SECRET = process.env.COOKIE_SECRET;
 
 const app = express();
 
