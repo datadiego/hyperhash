@@ -3,6 +3,8 @@ FROM node:18
 # Set the working directory
 WORKDIR /usr/src/app
 
+ENV NODE_ENV=production
+ENV COOKIE_SECRET=changethis
 # Copy the rest of the application code
 COPY . .
 
