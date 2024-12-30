@@ -1,6 +1,0 @@
-ejemplo
-a
-vb
-1234
-qwerty
-password
