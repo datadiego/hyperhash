@@ -12,7 +12,7 @@ COPY . .
 RUN npm install
 
 #run utils/get_dics.sh
-RUN chmod +x utils/get_dics.sh
+RUN chmod +x ./utils/get_dics.sh
 RUN ./utils/get_dics.sh
 
 # Expose the port the app runs on
