@@ -1,14 +1,19 @@
 const fs = require('fs');
 const path = require('path');
 //const rockyou = fs.readFileSync(path.join(__dirname, 'rockyou.txt'), 'utf8').split('\n');
-const dict = fs.readFileSync(path.join(__dirname, 'dict.txt'), 'utf8').split('\n');
+//const dict = fs.readFileSync(path.join(__dirname, 'dict.txt'), 'utf8').split('\n');
 const { encryptMD4, encryptMD5, encryptSHA1, encryptSHA256, bcryptHash } = require('./hashing');
 
 
-const diccionarios = {
-    dict
-};
+const archivos = ["pokemon1.txt", "pokemon2.txt", "it.txt"]
 
+
+const diccionarios = []
+
+for(archivo of archivos){
+    const diccionario = fs.readFileSync(path.join(__dirname, archivo), 'utf8').split('\n');
+    diccionarios.push(diccionario)
+}
 function getRandom(){
     const diccionario = diccionarios[Object.keys(diccionarios)[Math.floor(Math.random() * Object.keys(diccionarios).length)]];
     const palabra =  diccionario[Math.floor(Math.random() * diccionario.length)];
