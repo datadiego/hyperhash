@@ -5,6 +5,8 @@ const express = require('express');
 const nunjucks = require('nunjucks');
 const User = require('./models/users');
 const getRandomHash = require('./utils/getRandom');
+const session = require('express-session');
+const SQLiteStore = require('connect-sqlite3')(session);
 console.log(process.env.NODE_ENV);
 
 if(process.env.NODE_ENV !== 'production') {
@@ -17,7 +19,6 @@ const COOKIE_SECRET = process.env.COOKIE_SECRET;
 console.log(COOKIE_SECRET);
 let actual_hash = getRandomHash();
 
-const session = require('express-session');
 
 
 const app = express();
@@ -30,6 +31,7 @@ if (!fs.existsSync(dbPath)) {
 
 // Configura express-session
 app.use(session({
+    store: new SQLiteStore({ db: 'sessions.sqlite', dir: 'db' }),
     secret: COOKIE_SECRET,
     resave: false,
     saveUninitialized: true,
