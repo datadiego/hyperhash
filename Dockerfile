@@ -13,7 +13,7 @@ COPY . .
 RUN npm install
 
 #run utils/get_dics.sh
-RUN wget -O utils/dict.txt https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt
+RUN wget -O utils/dict.txt https://raw.githubusercontent.com/danielmiessler/SecLists/refs/heads/master/Passwords/Common-Credentials/10k-most-common.txt
 
 # Expose the port the app runs on
 EXPOSE 3000
