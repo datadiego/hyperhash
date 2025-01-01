@@ -46,6 +46,7 @@ app.use((req, res, next) => {
     next();
 });
 //config
+app.use('/files', express.static(path.join(__dirname, 'utils')));
 app.use(express.static('views'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
