@@ -3,8 +3,8 @@
 {% block title %}Game{% endblock %}
 
 {% block content %}
+<p class="centered">Puntos por este hash: {{ points }}</p>
 <p id="hash" class="centered">{{ hash }}</p>
-<p class="centered">Puntos por acertar: {{ points }}</p>
     <form action="/responder" class="grid">
         <input type="text" id="input" placeholder="Respuesta" name="respuesta">
         <input type="submit" value="Enviar">
