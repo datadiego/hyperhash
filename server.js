@@ -73,22 +73,20 @@ app.get("/api/hash", (req, res) => {
 });
 
 app.get('/', isAuthenticated(), (req, res) => {
-    const obj = {
-        hash: actual_hash["hash"]
-    };
-    res.render('game', obj);
-});
-
-app.get('/game', isAuthenticated(), (req, res) => {
     const currentTime = Date.now();
     const timeElapsed = currentTime - actual_hash["timestamp"];
     const hoursElapse = Math.floor(timeElapsed / 3600000);
     const points = 1 + hoursElapse;
+    console.log("Puntos:", points);
     const obj = {
         hash: actual_hash["hash"],
         points
     };
     res.render('game', obj);
+});
+
+app.get('/game', isAuthenticated(), (req, res) => {
+    res.redirect('/'); 
 });
 
 app.get("/responder", isAuthenticated(), (req, res) => {
