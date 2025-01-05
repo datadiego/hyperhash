@@ -63,6 +63,7 @@ app.use(express.urlencoded({ extended: true }));
 //router
 app.use('/api/users', require('./controllers/users'));
 app.use('/api/auth', require('./controllers/auth'));
+app.use('/api/cracked', require('./controllers/cracked'));
 
 app.get("/api/hash", (req, res) => {
     res.json(actual_hash["hash"]);
@@ -138,6 +139,17 @@ app.get('/leaderboard', isAuthenticated(), (req, res) => {
     //order by points
     users.sort((a, b) => b.points - a.points);
     res.render('leaderboard', {users});
+});
+
+app.get('/points', isAuthenticated(), (req, res) => {
+    const users = User.all();
+    const points = users.map(user => {
+        return {
+            username: user.username,
+            points: user.points
+        }
+    });
+    res.json(points);
 });
 
 app.listen(3000, () => {
