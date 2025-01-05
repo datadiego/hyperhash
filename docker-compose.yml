@@ -9,6 +9,7 @@ services:
       - COOKIE_SECRET=changethis
     volumes:
       - .:/usr/src/app
+      - ./db:/usr/src/app/db 
     ports:
       - "3000:3000"
 
