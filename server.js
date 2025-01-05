@@ -17,7 +17,10 @@ if(process.env.NODE_ENV !== 'production') {
 }
 const COOKIE_SECRET = process.env.COOKIE_SECRET;
 console.log(COOKIE_SECRET);
-let actual_hash = getRandomHash();
+let actual_hash = {
+    ...getRandomHash(),
+    timestamp: Date.now()
+}
 
 
 
@@ -46,6 +49,7 @@ app.use((req, res, next) => {
     next();
 });
 //config
+app.use('/files', express.static(path.join(__dirname, 'utils')));
 app.use(express.static('views'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -70,17 +74,20 @@ app.get("/api/hash", (req, res) => {
 });
 
 app.get('/', isAuthenticated(), (req, res) => {
+    const currentTime = Date.now();
+    const timeElapsed = currentTime - actual_hash["timestamp"];
+    const hoursElapse = Math.floor(timeElapsed / 3600000);
+    const points = 1 + hoursElapse;
+    console.log("Puntos:", points);
     const obj = {
-        hash: actual_hash["hash"]
+        hash: actual_hash["hash"],
+        points
     };
     res.render('game', obj);
 });
 
 app.get('/game', isAuthenticated(), (req, res) => {
-    const obj = {
-        hash: actual_hash["hash"]
-    };
-    res.render('game', obj);
+    res.redirect('/'); 
 });
 
 app.get("/responder", isAuthenticated(), (req, res) => {
@@ -91,12 +98,19 @@ app.get("/responder", isAuthenticated(), (req, res) => {
     const username = req.session.user;
     const user = User.getFromUsername(username);
     if (respuesta === actual_hash["palabra"]) {
-        actual_hash = getRandomHash();
-        obj["success"] = true;
-        obj["hash"] = actual_hash["hash"];
-        user.points += 1;
-        user.correct_guesses += 1;
+        const currentTime = Date.now();
+        const timeElapsed = currentTime - actual_hash["timestamp"];
+        const hoursElapse = Math.floor(timeElapsed / 3600000);
+        const points = 1 + hoursElapse;
+
+        user.points += points;
+        user.successful_guesses += 1;
+        actual_hash = {
+            ...getRandomHash(),
+            timestamp: Date.now()
+        };
         User.update(user.username, user);
+        obj["success"] = true;
         res.render('game', obj);
     } else {
         user.failed_guesses += 1;

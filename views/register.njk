@@ -30,6 +30,7 @@
         const data = await response.json();
         if (data.success) {
             document.getElementById('respuesta').innerText = 'Usuario registrado exitosamente';
+            window.location.href = '/login';
             //limpia los inputs
             document.querySelector('form').reset();
         } else {

@@ -9,25 +9,27 @@
 <p>Por ejemplo, si tienes la cadena "hola", puedes convertirla en el hash "31d6cfe0d16ae931b73c59d7e0c089c0" con el algoritmo "MD4".</p>
 <pre>
 ╔════════╗    ╔═════╗
-║ "hola" ╠═══>║ MD4 ╠═>"31d6cfe0d16ae931b73c59d7e0c089c0"
+║ "hola" ╠═══❱║ MD4 ╠═❱ "31d6cfe0d16ae931b73c59d7e0c089c0"
 ╚════════╝    ╚═════╝
 </pre>
 
 <p>Una vez que tienes el hash, no puedes convertirlo de vuelta a la cadena original, esto hace que los hashes sean útiles para almacenar contraseñas y otros datos sensibles.</p>
 <p>Aunque no puedas sacar información de un hash, si que puedes hashear multiples palabras y compararlas con el hash que tienes.</p>
 <pre>
-╔palabra_original═╗  
-║ "?????????????" ╠═> "31d6cfe0d16ae931b73c59d7e0c089c0"<═╗
-╚═════════════════╝                                       ║
-╔diccionario══╗                                      ╔════╝
-║ "password"  ╠═> "8a9d093f14f8701df17732b2bb182c74" ║ Coinciden!
-║ "1234"      ╠═> "f375f401ddc698af533f16f8ac1e91c1" ║ 
-║ "qwerty"    ╠═> "2a4bbeffd06c016ab4134cc7963496d2" ║
-║ "hola"      ╠═> "31d6cfe0d16ae931b73c59d7e0c089c0"<╝
+╔hash════════════════════════════════╗
+║ "31d6cfe0d16ae931b73c59d7e0c089c0" ║❰──────┐
+╚════════════════════════════════════╝       └────────┐
+╔diccionario══╗                                       │
+║ "password"  ╠═❱ "8a9d093f14f8701df17732b2bb182c74"  │ Coinciden!
+║ "1234"      ╠═❱ "f375f401ddc698af533f16f8ac1e91c1"  │
+║ "qwerty"    ╠═❱ "2a4bbeffd06c016ab4134cc7963496d2"  │
+║ "hola"      ╠═❱ "31d6cfe0d16ae931b73c59d7e0c089c0"❰─┘
 ╚═════════════╝
+
 </pre>
 
 <p>Esto identifica la palabra "hola" como la contraseña correcta usando el algoritmo MD4.</p>
+
 <h2>Herramientas</h2>
 <p>Si nunca has roto un hash, te recomendamos empezar por estas herramientas:</p>
 <ul>
@@ -35,7 +37,28 @@
     <li>John the Ripper</li>
 </ul>
 
-<p>Puedes usarlas en Ubuntu o Kali Linux.</p>
+<p>Ambas herramientas pueden recorrer listas de palabras y compararlas con un hash dado.</p>
+
+<h2>Wordlists</h2>
+<p>Además de un software de cracking, necesitarás listas de palabras y contraseñas, empieza por descargar estas:</p>
+<ul>
+    <li><a href="/files/it.txt">it.txt</a></li>
+    <li><a href="/files/pokemon1.txt">pokemon1.txt</a></li>
+    <li><a href="/files/pokemon2.txt">pokemon2.txt</a></li>
+    <li><a href="https://github.com/brannondorsey/naive-hashcat/releases/download/data/rockyou.txt">rockyou.txt</a></li>
+</ul>
+
+<p>Los hashes que se generan en este sitio están basados en estas listas.</p>
+
+<p>Sin embargo, muchos hashes estarán hechos a partir de combinaciones de estas palabras, deberías apuntar a listas más grandes si quieres romper hashes más complejos.</p>
+
+<p>Algunas ideas para crear listas que te servirán para jugar mejor:</p>
+<ul>
+    <li>Combinar palabras de diferentes listas.</li>
+    <li>Crea listas centradas en rangos numéricos.</li>
+    <li>Usa listas de nombres de personas.</li>
+    <li>Usa listas de nombres de ciudades.</li>
+</ul>
 
 <h2>Reglas</h2>
 <ul>
