@@ -156,7 +156,7 @@ app.get('/leaderboard', isAuthenticated(), (req, res) => {
 });
 
 app.get('/cracked', isAuthenticated(), (req, res) => {
-    const cracked = Cracked.all();
+    const cracked = new Cracked().all();
     res.render('cracked', {cracked});
 });
 
