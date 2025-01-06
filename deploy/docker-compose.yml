@@ -12,7 +12,7 @@ services:
       - NODE_ENV=production
       - COOKIE_SECRET=secret
     volumes:
-      - ./db:/app/db
+      - ./db:/usr/src/app/db
   nginx:
     image: nginx:latest
     container_name: nginx
@@ -28,3 +28,6 @@ services:
 networks:
   webnet:
     driver: bridge
+
+volumes:
+  db:
