@@ -1,6 +1,5 @@
 const sqlite = require('better-sqlite3');
 const path = require('path');
-const bcrypt = require('bcrypt');
 const dbPath = path.join(__dirname, '../db/db.sqlite');
 
 class Cracked {
@@ -27,8 +26,8 @@ class Cracked {
     }
 
     create(cracked) {
-        const query = 'INSERT INTO cracked (hash, password) VALUES (?, ?)';
-        const result = this.db.prepare(query).run(cracked.hash, cracked.password);
+        const query = 'INSERT INTO cracked (username, cracked, points) VALUES (?, ?, ?)';
+        const result = this.db.prepare(query).run(cracked.username, cracked.cracked, cracked.points);
         return result;
     }
 

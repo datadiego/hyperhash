@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS users  (
 CREATE TABLE IF NOT EXISTS cracked  (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     username TEXT NOT NULL,
-    cracked_password TEXT NOT NULL,
+    cracked TEXT NOT NULL,
     points INTEGER DEFAULT 0,
     FOREIGN KEY (username) REFERENCES users(username)
 );

@@ -1,5 +1,14 @@
 const path = require('path');
+
+//check if db/db.sqlite exists
 const fs = require('fs');
+const dbPath = path.join(__dirname, 'db/db.sqlite');
+if (!fs.existsSync(dbPath)) {
+    //execute db/init.js
+    require('./db/init');
+}
+    
+
 const isAuthenticated = require('./middleware/auth');
 const express = require('express');
 const nunjucks = require('nunjucks');
@@ -8,7 +17,6 @@ const Cracked = require('./models/cracked');
 const getRandomHash = require('./utils/getRandom');
 const session = require('express-session');
 const SQLiteStore = require('connect-sqlite3')(session);
-console.log(process.env.NODE_ENV);
 
 if(process.env.NODE_ENV !== 'production') {
     console.log("Running in development mode");
@@ -25,12 +33,6 @@ let actual_hash = {
 }
 
 const app = express();
-
-//check if db exists
-const dbPath = path.join(__dirname, 'db/db.sqlite');
-if (!fs.existsSync(dbPath)) {
-    require('./db/init');
-}
 
 // Configura express-session
 app.use(session({
@@ -67,7 +69,7 @@ app.use(express.urlencoded({ extended: true }));
 //router
 app.use('/api/users', require('./controllers/users'));
 app.use('/api/auth', require('./controllers/auth'));
-app.use('/api/cracked', require('./controllers/cracked'));
+//app.use('/api/cracked', require('./controllers/cracked'));
 
 app.get("/api/hash", (req, res) => {
     res.json(actual_hash["hash"]);
@@ -110,6 +112,7 @@ app.get("/responder", isAuthenticated(), (req, res) => {
             timestamp: Date.now()
         };
         User.update(user.username, user);
+        //cracked.create({username: user.username, cracked: actual_hash["hash"], points});
         obj["success"] = true;
         res.render('game', obj);
     } else {

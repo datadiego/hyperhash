@@ -6,7 +6,7 @@ const db = new sqlite('./db/db.sqlite');
 
 const initSqlPath = path.join(__dirname, 'init.sql');
 const query = fs.readFileSync(initSqlPath, 'utf8');
-
+console.log('Initializing database');
 db.exec(query);
 db.close();
 console.log('Database initialized');

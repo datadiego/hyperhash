@@ -32,6 +32,7 @@ router.post('/register', limiter, (req, res) => {
         };
         res.json(respuesta);
     } catch (error) {
+        console.log(error);
         res.status(500).json({ error: 'Hubo un error durante el registro' });
     }
 });
