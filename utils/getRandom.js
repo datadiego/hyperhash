@@ -16,7 +16,17 @@ for(archivo of archivos){
 }
 function getRandom(){
     const diccionario = diccionarios[Object.keys(diccionarios)[Math.floor(Math.random() * Object.keys(diccionarios).length)]];
-    const palabra =  diccionario[Math.floor(Math.random() * diccionario.length)];
+    const randomVal = Math.floor(Math.random() * 5);
+    const palabra1 =  diccionario[Math.floor(Math.random() * diccionario.length)]
+    let diccionario2 
+    let palabra2
+    if(randomVal == 0){
+        diccionario2 = diccionarios[Object.keys(diccionarios)[Math.floor(Math.random() * Object.keys(diccionarios).length)]];
+        palabra2 = diccionario2[Math.floor(Math.random() * diccionario2.length)]
+    }
+    let palabra
+    palabra = randomVal == 0 ? palabra1 + palabra2 : palabra1
+    console.log(palabra)    
     const hashMD4 = encryptMD4(palabra);
     const hashMD5 = encryptMD5(palabra);
     const hashSHA1 = encryptSHA1(palabra);
