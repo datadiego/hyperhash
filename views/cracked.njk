@@ -3,11 +3,13 @@
 {% block title %}Cracked{% endblock %}
 
 {% block content %}
+
 <table>
     <tr>
         <td>#</td>
-        <td>Hash</td>
+        <td>Usuario</td>
         <td>Puntos</td>
+        <td>Hash</td>
     </tr>
 
     {% for entry in cracked %}
@@ -15,6 +17,7 @@
         <td>{{ loop.index }}</td>
         <td>{{ entry.username }}</td>
         <td>{{ entry.points }}</td>
+        <td>{{ entry.cracked }}</td>
     </tr>
     {% endfor %}
 </table>
