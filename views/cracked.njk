@@ -1,0 +1,21 @@
+{% extends "base.njk" %}
+
+{% block title %}Cracked{% endblock %}
+
+{% block content %}
+<table>
+    <tr>
+        <td>#</td>
+        <td>Hash</td>
+        <td>Puntos</td>
+    </tr>
+
+    {% for entry in cracked %}
+    <tr>
+        <td>{{ loop.index }}</td>
+        <td>{{ entry.username }}</td>
+        <td>{{ entry.points }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

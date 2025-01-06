@@ -4,6 +4,7 @@ const isAuthenticated = require('./middleware/auth');
 const express = require('express');
 const nunjucks = require('nunjucks');
 const User = require('./models/users');
+const Cracked = require('./models/cracked');
 const getRandomHash = require('./utils/getRandom');
 const session = require('express-session');
 const SQLiteStore = require('connect-sqlite3')(session);
@@ -154,15 +155,9 @@ app.get('/leaderboard', isAuthenticated(), (req, res) => {
     res.render('leaderboard', {users});
 });
 
-app.get('/points', isAuthenticated(), (req, res) => {
-    const users = User.all();
-    const points = users.map(user => {
-        return {
-            username: user.username,
-            points: user.points
-        }
-    });
-    res.json(points);
+app.get('/cracked', isAuthenticated(), (req, res) => {
+    const cracked = Cracked.all();
+    res.render('cracked', {cracked});
 });
 
 app.listen(3000, () => {
