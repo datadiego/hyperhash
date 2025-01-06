@@ -23,8 +23,6 @@ let actual_hash = {
     timestamp: Date.now()
 }
 
-
-
 const app = express();
 
 //check if db exists

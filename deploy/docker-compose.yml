@@ -11,6 +11,9 @@ services:
     environment:
       - NODE_ENV=production
       - COOKIE_SECRET=secret
+    volumes:
+      - ./db:/usr/src/app/db
+    
 
   nginx:
     image: nginx:latest
