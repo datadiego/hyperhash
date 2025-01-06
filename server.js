@@ -15,6 +15,7 @@ if(process.env.NODE_ENV !== 'production') {
 } else {
     console.log("Running in production mode");
 }
+
 const COOKIE_SECRET = process.env.COOKIE_SECRET;
 console.log(COOKIE_SECRET);
 let actual_hash = {
