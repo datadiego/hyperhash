@@ -107,12 +107,17 @@ app.get("/responder", isAuthenticated(), (req, res) => {
 
         user.points += points;
         user.successful_guesses += 1;
+        User.update(user.username, user);
+        //insert in cracked
+        const cracked = new Cracked().create({
+            username: user.username,
+            cracked: actual_hash["palabra"]+":"+actual_hash["hash"],
+            points
+        });
         actual_hash = {
             ...getRandomHash(),
             timestamp: Date.now()
         };
-        User.update(user.username, user);
-        //cracked.create({username: user.username, cracked: actual_hash["hash"], points});
         obj["success"] = true;
         res.render('game', obj);
     } else {
@@ -160,6 +165,7 @@ app.get('/leaderboard', isAuthenticated(), (req, res) => {
 
 app.get('/cracked', isAuthenticated(), (req, res) => {
     const cracked = new Cracked().all();
+    console.log("cracked",cracked);
     res.render('cracked', {cracked});
 });
 
