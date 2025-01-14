@@ -78,8 +78,9 @@ app.get("/api/hash", (req, res) => {
 app.get('/', isAuthenticated(), (req, res) => {
     const currentTime = Date.now();
     const timeElapsed = currentTime - actual_hash["timestamp"];
-    const hoursElapse = Math.floor(timeElapsed / 3600000);
-    const points = 1 + hoursElapse;
+    //const hoursElapse = Math.floor(timeElapsed / 3600000);
+    const minutesElapse = Math.floor(timeElapsed / 60000);
+    const points = 1 + minutesElapse;
     console.log("Puntos:", points);
     const obj = {
         hash: actual_hash["hash"],
@@ -102,8 +103,9 @@ app.get("/responder", isAuthenticated(), (req, res) => {
     if (respuesta === actual_hash["palabra"]) {
         const currentTime = Date.now();
         const timeElapsed = currentTime - actual_hash["timestamp"];
-        const hoursElapse = Math.floor(timeElapsed / 3600000);
-        const points = 1 + hoursElapse;
+        //const hoursElapse = Math.floor(timeElapsed / 3600000);
+        const minutesElapse = Math.floor(timeElapsed / 60000);
+        const points = 1 + minutesElapse;
 
         user.points += points;
         user.successful_guesses += 1;
