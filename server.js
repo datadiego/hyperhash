@@ -26,7 +26,6 @@ if(process.env.NODE_ENV !== 'production') {
 }
 
 const COOKIE_SECRET = process.env.COOKIE_SECRET;
-console.log(COOKIE_SECRET);
 let actual_hash = {
     ...getRandomHash(),
     timestamp: Date.now()
@@ -81,7 +80,6 @@ app.get('/', isAuthenticated(), (req, res) => {
     //const hoursElapse = Math.floor(timeElapsed / 3600000);
     const minutesElapse = Math.floor(timeElapsed / 60000);
     const points = 1 + minutesElapse;
-    console.log("Puntos:", points);
     const obj = {
         hash: actual_hash["hash"],
         points
@@ -167,7 +165,6 @@ app.get('/leaderboard', isAuthenticated(), (req, res) => {
 
 app.get('/cracked', isAuthenticated(), (req, res) => {
     const cracked = new Cracked().all();
-    console.log("cracked",cracked);
     res.render('cracked', {cracked});
 });
 

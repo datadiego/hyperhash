@@ -26,7 +26,6 @@ const User = {
         return result;
     },
     create: user => {
-        console.log(user)
         const db = new sqlite(dbPath);
         const saltRounds = 10;
         const hash = bcrypt.hashSync(user.password, saltRounds);

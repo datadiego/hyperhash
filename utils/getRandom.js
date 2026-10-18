@@ -26,7 +26,6 @@ function getRandom(){
     }
     let palabra
     palabra = randomVal == 0 ? palabra1 + palabra2 : palabra1
-    console.log(palabra)    
     const hashMD4 = encryptMD4(palabra);
     const hashMD5 = encryptMD5(palabra);
     const hashSHA1 = encryptSHA1(palabra);
