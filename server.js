@@ -62,13 +62,9 @@ nunjucks.configure('views', {
 });
 app.set('view engine', 'njk');
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
 //router
 app.use('/api/users', require('./controllers/users'));
 app.use('/api/auth', require('./controllers/auth'));
-//app.use('/api/cracked', require('./controllers/cracked'));
 
 app.get("/api/hash", (req, res) => {
     res.json(actual_hash["hash"]);
@@ -154,10 +150,6 @@ app.get('/profile', isAuthenticated(), (req, res) => {
 
 app.get('/leaderboard', isAuthenticated(), (req, res) => {
     const users = User.all();
-    //return only names and points
-    users.forEach(user => {
-        delete user.password;
-    });
     //order by points
     users.sort((a, b) => b.points - a.points);
     res.render('leaderboard', {users});

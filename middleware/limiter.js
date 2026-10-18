@@ -6,9 +6,4 @@ const limiter = rateLimit({
     message: "Demasiadas peticiónes, intenta de nuevo en un minuto"
 });
 
-const limiterMiddleware = (req, res, next) => {
-    res.setHeader('X-Powered-By', 'PHP 4.2.0');
-    next();
-}
-
 module.exports = limiter;

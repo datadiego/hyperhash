@@ -13,36 +13,10 @@ class Cracked {
         return result;
     }
 
-    get(id) {
-        const query = 'SELECT * FROM cracked WHERE id = ?';
-        const result = this.db.prepare(query).get(id);
-        return result;
-    }
-
-    get(name){
-        const query = 'SELECT * FROM cracked WHERE hash = ?';
-        const result = this.db.prepare(query).get(name);
-        return result;
-    }
-
     create(cracked) {
         const query = 'INSERT INTO cracked (username, cracked, points) VALUES (?, ?, ?)';
         const result = this.db.prepare(query).run(cracked.username, cracked.cracked, cracked.points);
         return result;
-    }
-
-    delete(id) {
-        const query = 'DELETE FROM cracked WHERE id = ?';
-        const result = this.db.prepare(query).run(id);
-        return result;
-    }
-
-    leaderboard() {
-        const query = 'SELECT hash, password FROM cracked ORDER BY hash DESC';
-        const cracked = this.db.prepare(query).all();
-
-        const sortedCracked = cracked.sort((a, b) => b.hash - a.hash);
-        return sortedCracked;
     }
 }
 

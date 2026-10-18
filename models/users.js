@@ -40,14 +40,6 @@ const User = {
         const result = db.prepare(query).run(user.username, user.password, user.points, user.failed_guesses, user.correct_guesses, id);
         db.close();
     },
-    
-    delete: id => {
-        const db = new sqlite(dbPath);
-        const query = 'DELETE FROM users WHERE id = ?';
-        const result = db.prepare(query).run(id);
-        db.close();
-        return result;
-    },
     leaderboard: () => {
         const db = new sqlite(dbPath);
         const query = 'SELECT username, points FROM users ORDER BY points DESC';
