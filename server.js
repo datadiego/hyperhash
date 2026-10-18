@@ -108,7 +108,7 @@ app.get("/responder", isAuthenticated(), (req, res) => {
         const points = 1 + minutesElapse;
 
         user.points += points;
-        user.successful_guesses += 1;
+        user.correct_guesses += 1;
         User.update(user.username, user);
         //insert in cracked
         const cracked = new Cracked().create({

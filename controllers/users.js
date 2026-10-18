@@ -37,14 +37,6 @@ router.post('/register', limiter, (req, res) => {
     }
 });
 
-router.put('/:id', (req, res) => {
-    res.json(User.update(req.params.id, req.body));
-});
-
-router.delete('/:id', (req, res) => {
-    res.json(User.delete(req.params.id));
-});
-
 router.get('/points', (req, res) => {
     try {
         const users = User.all();

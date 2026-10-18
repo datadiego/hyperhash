@@ -6,14 +6,14 @@ const dbPath = path.join(__dirname, '../db/db.sqlite');
 const User = {
     all: () => {
         const db = new sqlite(dbPath);
-        const query = 'SELECT * FROM users';
+        const query = 'SELECT id, username, failed_guesses, correct_guesses, points FROM users';
         const result = db.prepare(query).all();
         db.close();
         return result;
     },
     get: id => {
         const db = new sqlite(dbPath);
-        const query = 'SELECT * FROM users WHERE id = ?';
+        const query = 'SELECT id, username, failed_guesses, correct_guesses, points FROM users WHERE id = ?';
         const result = db.prepare(query).get(id);
         db.close();
         return result;
