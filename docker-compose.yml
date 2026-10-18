@@ -10,4 +10,5 @@ services:
       - /usr/src/app/node_modules
     environment:
       - NODE_ENV=development
+      - MAX_HASH_POINTS=50
     command: node server.js

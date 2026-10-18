@@ -26,9 +26,16 @@ if(process.env.NODE_ENV !== 'production') {
 }
 
 const COOKIE_SECRET = process.env.COOKIE_SECRET;
+const MAX_HASH_POINTS = parseInt(process.env.MAX_HASH_POINTS, 10) || 50;
 let actual_hash = {
     ...getRandomHash(),
     timestamp: Date.now()
+}
+
+function pointsForHash() {
+    const timeElapsed = Date.now() - actual_hash["timestamp"];
+    const minutesElapsed = Math.floor(timeElapsed / 60000);
+    return Math.min(1 + minutesElapsed, MAX_HASH_POINTS);
 }
 
 const app = express();
@@ -71,11 +78,7 @@ app.get("/api/hash", (req, res) => {
 });
 
 app.get('/', isAuthenticated(), (req, res) => {
-    const currentTime = Date.now();
-    const timeElapsed = currentTime - actual_hash["timestamp"];
-    //const hoursElapse = Math.floor(timeElapsed / 3600000);
-    const minutesElapse = Math.floor(timeElapsed / 60000);
-    const points = 1 + minutesElapse;
+    const points = pointsForHash();
     const obj = {
         hash: actual_hash["hash"],
         points
@@ -95,11 +98,7 @@ app.get("/responder", isAuthenticated(), (req, res) => {
     const username = req.session.user;
     const user = User.getFromUsername(username);
     if (respuesta === actual_hash["palabra"]) {
-        const currentTime = Date.now();
-        const timeElapsed = currentTime - actual_hash["timestamp"];
-        //const hoursElapse = Math.floor(timeElapsed / 3600000);
-        const minutesElapse = Math.floor(timeElapsed / 60000);
-        const points = 1 + minutesElapse;
+        const points = pointsForHash();
 
         user.points += points;
         user.correct_guesses += 1;
